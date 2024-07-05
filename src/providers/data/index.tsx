@@ -1,6 +1,4 @@
 import { GraphQLClient } from "@refinedev/nestjs-query";
-import { Http2SecureServer } from "http2";
-import { url } from "inspector";
 
 export const API_URL = "https://api.crm.refine.dev"
 
