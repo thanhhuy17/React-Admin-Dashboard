@@ -1,7 +1,8 @@
 import { Avatar as AntdAvatar, AvatarProps } from "antd";
 import { getNameInitials } from "../utilities";
 type Props = AvatarProps & {
-  name?: string;
+  // Thuộc djang custom type và  "AvatarProps &" goin là Intersection
+  name?: string; // Nếu có dấu ? khi khai báo thì có cũng đc không có cũng đc.
 };
 const CustomAvatar = ({ name, style, ...rest }: Props) => {
   return (

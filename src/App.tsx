@@ -20,6 +20,7 @@ import { App as AntdApp } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Home, ForgotPassword, Login, Register } from "./pages";
 import Layout from "./components/layout";
+import { resources } from "./config/resources";
 
 function App() {
   return (
@@ -34,28 +35,29 @@ function App() {
               notificationProvider={useNotificationProvider}
               routerProvider={routerBindings}
               authProvider={authProvider}
-              resources={[
-                {
-                  name: "blog_posts",
-                  list: "/blog-posts",
-                  create: "/blog-posts/create",
-                  edit: "/blog-posts/edit/:id",
-                  show: "/blog-posts/show/:id",
-                  meta: {
-                    canDelete: true,
-                  },
-                },
-                {
-                  name: "categories",
-                  list: "/categories",
-                  create: "/categories/create",
-                  edit: "/categories/edit/:id",
-                  show: "/categories/show/:id",
-                  meta: {
-                    canDelete: true,
-                  },
-                },
-              ]}
+              resources = {resources}
+              // resources={[
+              //   {
+              //     name: "blog_posts",
+              //     list: "/blog-posts",
+              //     create: "/blog-posts/create",
+              //     edit: "/blog-posts/edit/:id",
+              //     show: "/blog-posts/show/:id",
+              //     meta: {
+              //       canDelete: true,
+              //     },
+              //   },
+              //   {
+              //     name: "categories",
+              //     list: "/categories",
+              //     create: "/categories/create",
+              //     edit: "/categories/edit/:id",
+              //     show: "/categories/show/:id",
+              //     meta: {
+              //       canDelete: true,
+              //     },
+              //   },
+              // ]}
               options={{
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
