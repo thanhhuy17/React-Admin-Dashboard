@@ -1,7 +1,5 @@
 import {
-  CompassOutlined,
   DashboardOutlined,
-  DashOutlined,
   ProjectOutlined,
   ShopOutlined,
 } from "@ant-design/icons";

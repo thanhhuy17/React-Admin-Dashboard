@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
+import { describe, it, expect } from '@jest/globals';
 import { getDateColor } from "./get-date-colors";
-import { describe, it } from "node:test";
 
 describe("getDateColors function", () => {
   it("should return 'error' if the date is before today", () => {
@@ -10,7 +10,7 @@ describe("getDateColors function", () => {
 
   it.each([1, 2, 3])(
     "should return 'warning' if the date is %s days from today",
-    (day) => {
+    (day:number) => {
       const date = dayjs().add(day, "day").format("YYYY-MM-DD");
       expect(getDateColor({ date: date })).toBe("warning");
     },
