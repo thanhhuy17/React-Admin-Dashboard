@@ -32,7 +32,7 @@ export const TASK_STAGES_SELECT_QUERY = gql`
     }
   }
 `;
-
+// Upcoming Events
 export const DASHBOARD_CALENDAR_UPCOMING_EVENTS_QUERY = gql`
   query DashboardCalendarUpcomingEvents(
     $filter: EventFilter!
@@ -52,7 +52,7 @@ export const DASHBOARD_CALENDAR_UPCOMING_EVENTS_QUERY = gql`
   }
 `;
 
-
+// Drow Chart
 export const DASHBOARD_DEALS_CHART_QUERY = gql`
   query DashboardDealsChart(
     $filter: DealStageFilter!
@@ -61,11 +61,32 @@ export const DASHBOARD_DEALS_CHART_QUERY = gql`
   ) {
     dealStages(filter: $filter, sorting: $sorting, paging: $paging) {
       nodes {
-        id
         title
-        
+        dealsAggregate {
+          groupBy {
+            closeDateMonth
+            closeDateYear
+          }
+          sum {
+            value
+          }
+        }
       }
-        totalCount
+      totalCount
+    }
+  }
+`;
+// Total counts
+export const DASHBOARD_TOTAL_COUNTS_QUERY = gql`
+  query DashboardTotalCounts{
+    companies{
+      totalCount
+    }
+    contacts{
+      totalCount
+    }
+    deals{
+      totalCount
     }
   }
 `;
