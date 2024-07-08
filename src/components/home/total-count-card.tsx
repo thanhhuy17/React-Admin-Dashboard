@@ -1,14 +1,10 @@
 import {
-  AreaChartOutlined,
-  BuildOutlined,
   ContactsOutlined,
   DollarOutlined,
-  HomeOutlined,
   SolutionOutlined,
 } from "@ant-design/icons";
 import { Area, AreaConfig } from "@ant-design/plots";
 import { Card } from "antd";
-import { title } from "process";
 
 type Props = {
   resource: "companies" | "contacts" | "deals";
@@ -30,11 +26,10 @@ const DashboardTotalCountCard = ({
         : "#CE9178",
     fontSize: "1.3rem",
   };
-
   const config: AreaConfig = {
     data: [],
-    xField: "timeText",
-    yField: "totalCount",
+    xField: "index",
+    yField: "value",
     isStack: false,
     seriesField: "state",
     animation: true,
@@ -77,6 +72,7 @@ const DashboardTotalCountCard = ({
           display: "flex",
           alignItems: "center",
           gap: "30px",
+          marginTop: "0px",
         }}
       >
         <span
@@ -101,3 +97,5 @@ const DashboardTotalCountCard = ({
 };
 
 export default DashboardTotalCountCard;
+
+//===================huy
