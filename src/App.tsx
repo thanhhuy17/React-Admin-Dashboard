@@ -17,6 +17,7 @@ import { Home, ForgotPassword, Login, Register } from "./pages";
 import Layout from "./components/layout";
 import { resources } from "./config/resources";
 import CompanyListPage from "./pages/company/list";
+import Create from "./pages/company/create";
 
 function App() {
   return (
@@ -79,7 +80,10 @@ function App() {
                   }
                 >
                   <Route index element={<Home />} />
-                  <Route path="/companies" element={<CompanyListPage />} />
+                  <Route path="/companies">
+                    <Route index element={<CompanyListPage />} />
+                    <Route path="new" element={<Create />} />
+                  </Route>
                 </Route>
               </Routes>
 

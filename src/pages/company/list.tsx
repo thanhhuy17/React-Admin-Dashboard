@@ -1,4 +1,11 @@
-import { CreateButton, FilterDropdown, List, useTable } from "@refinedev/antd";
+import {
+  CreateButton,
+  DeleteButton,
+  EditButton,
+  FilterDropdown,
+  List,
+  useTable,
+} from "@refinedev/antd";
 import { getDefaultFilter, useGo } from "@refinedev/core";
 
 import { COMPANIES_LIST_QUERY } from "../../graphql/queries";
@@ -6,13 +13,38 @@ import { Input, Space, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import CustomAvatar from "../../components/custom-avata";
 import { Text } from "../../components/text";
+import { currencyNumber } from "../../utilities";
 
 const CompanyListPage = () => {
   const go = useGo();
   const { tableProps, fillter } = useTable({
     resource: "companies",
+    onSearch: (values)=> {
+      return[{
+        field: 'name',
+        operator: 'contains',
+        value: values.name
+      }]
+    },
     pagination: {
       pageSize: 12,
+    },
+    sorters: {
+      initial: [
+        {
+          field: "createdAt",
+          order: "desc",
+        },
+      ],
+    },
+    filters: {
+      initial: [
+        {
+          field: "name",
+          operator: "contains",
+          value: undefined,
+        },
+      ],
     },
     meta: {
       gqlQuery: COMPANIES_LIST_QUERY,
@@ -63,9 +95,27 @@ const CompanyListPage = () => {
           )}
         />
 
-        <Table.Column title="Open deals amount" />
+        <Table.Column<Company>
+          dataIndex="totalRevenue"
+          title="Open deals amount"
+          render={(value, company) => (
+            <Text>
+              {currencyNumber(company?.dealsAggregate?.[0].sum?.value || 0)}
+            </Text>
+          )}
+        />
 
-        <Table.Column title="Actions" />
+        <Table.Column<Company>
+          title="Actions"
+          fixed="right"
+          dataIndex="totalRevenue"
+          render={(value) => (
+            <Space>
+              <EditButton hideText size="small" recordItemId={value} />
+              <DeleteButton hideText size="small" recordItemId={value} />
+            </Space>
+          )}
+        />
       </Table>
     </List>
   );
