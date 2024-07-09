@@ -5,4 +5,8 @@ import DashboardTotalCountCard from "./home/total-count-card";
 import DashboardLatestActivities from "./home/latest-activities";
 
 
-export {UpcomingEvent, DealsChart, UpcomingEventSkeleton,DashboardTotalCountCard, DashboardLatestActivities}
+export {UpcomingEvent, 
+        DealsChart,
+        UpcomingEventSkeleton,
+        DashboardTotalCountCard,
+        DashboardLatestActivities}
