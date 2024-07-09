@@ -1,15 +1,13 @@
-import {
-  ContactsOutlined,
-  DollarOutlined,
-  SolutionOutlined,
-} from "@ant-design/icons";
+import { Card, Skeleton } from "antd";
+import { totalCountVariants } from "../../constants";
+import { Text } from "../text";
 import { Area, AreaConfig } from "@ant-design/plots";
-import { Card } from "antd";
+import { XFilled } from "@ant-design/icons";
 
 type Props = {
   resource: "companies" | "contacts" | "deals";
   isLoading: boolean;
-  totalCount: number;
+  totalCount?: number;
 };
 
 const DashboardTotalCountCard = ({
@@ -17,85 +15,81 @@ const DashboardTotalCountCard = ({
   isLoading,
   totalCount,
 }: Props) => {
-  const styleOk = {
-    color:
-      resource === "companies"
-        ? "#67BEEA"
-        : resource === "contacts"
-        ? "#73C991"
-        : "#CE9178",
-    fontSize: "1.3rem",
-  };
+  const { primaryColor, secondaryColor, icon, title } =
+    totalCountVariants[resource];
+
   const config: AreaConfig = {
-    data: [],
+    data: totalCountVariants[resource].data,
     xField: "index",
     yField: "value",
-    isStack: false,
-    seriesField: "state",
-    animation: true,
-    startOnZero: false,
+    appendPadding: [1, 0, 0, 0],
+    padding: 0,
+    syncViewPadding: true,
+    autoFit: true,
+    tooltip: false,
+    animation: false,
+    xAxis: false,
+    yAxis: {
+      tickCount: 12,
+      label: {
+        style: {
+          stroke: "transparent",
+        },
+      },
+      grid: {
+        line: {
+          style: {
+            stroke: "transparent",
+          },
+        },
+      },
+    },
     smooth: true,
+    line: {color: primaryColor},
+    areaStyle :()=>{
+      return{
+        fill:`l(20) 0:#FFF 0.2${secondaryColor} 1:${primaryColor}`
+      }
+    }
   };
   return (
-    <Card
-      style={{
-        height: "96px",
-        padding: 0,
-        display: "flex",
-        // alignItems: "center",
-      }}
-      size="small"
-    >
+    <Card style={{ height: "96px", padding: 0 }} size="small">
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "10px",
+          gap: "8px",
           whiteSpace: "nowrap",
-          marginTop: "-15px",
         }}
       >
-        {resource === "companies" ? (
-          <SolutionOutlined style={styleOk} />
-        ) : resource === "contacts" ? (
-          <ContactsOutlined style={styleOk} />
-        ) : (
-          <DollarOutlined style={styleOk} />
-        )}
-
-        <h4 style={{ marginTop: "8px" }}>
-          Number of {resource.charAt(0).toUpperCase() + resource.substring(1)}
-        </h4>
+        {icon}
+        <Text size="md" className="secondary" style={{ marginLeft: "8px" }}>
+          {title}
+        </Text>
       </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "30px",
-          marginTop: "0px",
-        }}
-      >
-        <span
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Text
+          size="xxxl"
+          strong
           style={{
-            fontWeight: "700",
-            color:
-              resource === "companies"
-                ? "#67BEEA"
-                : resource === "contacts"
-                ? "#73C991"
-                : "#CE9178",
-            fontSize: "2.5rem",
-            marginBottom: "-10px",
+            flex: 1,
+            whiteSpace: "nowrap",
+            flexShrink: "0",
+            textAlign: "start",
+            marginLeft: "48px",
+            fontVariantNumeric: "tabular-nums",
           }}
         >
-          {totalCount}
-        </span>
-        <Area {...config} height={50} width={200} />
+          {isLoading ? (
+            <Skeleton.Button style={{ marginTop: "8px", width: "74px" }} />
+          ) : (
+            totalCount
+          )}
+        </Text>
+        <Area {...config} style={{ width: "50%" }} />
       </div>
     </Card>
   );
 };
 
 export default DashboardTotalCountCard;
-
-//===================huy

@@ -1,9 +1,4 @@
-import {
-  Authenticated,
-  GitHubBanner,
-  Refine,
-  WelcomePage,
-} from "@refinedev/core";
+import { Authenticated, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
@@ -21,6 +16,7 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Home, ForgotPassword, Login, Register } from "./pages";
 import Layout from "./components/layout";
 import { resources } from "./config/resources";
+import CompanyListPage from "./pages/company/list";
 
 function App() {
   return (
@@ -35,7 +31,7 @@ function App() {
               notificationProvider={useNotificationProvider}
               routerProvider={routerBindings}
               authProvider={authProvider}
-              resources = {resources}
+              resources={resources}
               // resources={[
               //   {
               //     name: "blog_posts",
@@ -83,6 +79,7 @@ function App() {
                   }
                 >
                   <Route index element={<Home />} />
+                  <Route path="/companies" element={<CompanyListPage />} />
                 </Route>
               </Routes>
 
