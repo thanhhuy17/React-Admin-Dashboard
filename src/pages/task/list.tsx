@@ -8,9 +8,12 @@ import KanbanItem from "../../components/tasks/kanban/item";
 import { TASK_STAGES_QUERY, TASKS_QUERY } from "../../graphql/queries";
 import React from "react";
 import { TaskStage } from "../../graphql/schema.types";
+import { GetFieldsFromList } from "@refinedev/nestjs-query";
+import { TasksQuery } from "../../graphql/types";
+import ProjectCard, { ProjectCardMemo } from "../../components/tasks/kanban/card";
 
 const List = () => {
-  const { data: stages, isLoading: isLoadingStages } = useList({
+  const { data: stages, isLoading: isLoadingStages } = useList<TaskStage>({
     resource: "taskStages",
     filters: [
       {
@@ -29,7 +32,9 @@ const List = () => {
       gqlQuery: TASK_STAGES_QUERY,
     },
   });
-  const { data: tasks, isLoading: isLoadingTasks } = useList({
+  const { data: tasks, isLoading: isLoadingTasks } = useList<
+    GetFieldsFromList<TasksQuery>
+  >({
     resource: "tasks",
     sorters: [
       {
@@ -59,7 +64,7 @@ const List = () => {
     );
     const grouped: TaskStage[] = stages.data.map((stage) => ({
       ...stage,
-      tasks: tasks.data.filter((task) => task.stageId.toString() === stage.id),
+      tasks: tasks.data.filter((task) => task.stageId?.toString() === stage.id),
     }));
     return {
       unassignedStage,
@@ -68,9 +73,7 @@ const List = () => {
   }, [stages, tasks]);
   //   console.log("alo: ", tasks);
 
-  const handleAddCard = (args: {stageId: string}) => {
-    
-  };
+  const handleAddCard = (args: { stageId: string }) => {};
   return (
     <>
       <KanbanBoardContainer>
@@ -79,11 +82,18 @@ const List = () => {
             id="unassigned"
             title={"unassigned"}
             count={taskStages.unassignedStage?.length || 0}
-            onAddClick={() => handleAddCard( {stageId: 'unassigned'})}
+            onAddClick={() => handleAddCard({ stageId: "unassigned" })}
           >
-            <KanbanItem>This is my first to do</KanbanItem>
+            {taskStages.unassignedStage?.map((task) => (
+              <KanbanItem
+                key={task.id}
+                id={task.id}
+                data={{ ...task, stageId: "unassigned" }}
+              >
+                <ProjectCardMemo {...task} dueDate={task.dueDate || undefined} />
+              </KanbanItem>
+            ))}
           </KanbanColunm>
-          <KanbanColunm></KanbanColunm>
         </KanbanBoard>
       </KanbanBoardContainer>
     </>

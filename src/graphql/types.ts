@@ -993,3 +993,21 @@ export type SalesDealsQuery = {
     >;
   };
 };
+
+export type TasksQuery = {
+  tasks: Pick<Types.TaskConnection, "totalCount"> & {
+    nodes: Array<
+      Pick<
+        Types.Task,
+        | "id"
+        | "title"
+        | "description"
+        | "dueDate"
+        | "completed"
+        | "stageId"
+        | "createdAt"
+        | "updatedAt"
+      > & { users: Array<Pick<Types.User, "id" | "name" | "avatarUrl">> }
+    >;
+  };
+};
