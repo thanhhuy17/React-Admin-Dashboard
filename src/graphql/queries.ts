@@ -260,72 +260,72 @@ export const COMPANIES_LIST_QUERY = gql`
 // `;
 
 // // Query to get contacts associated with a company
-// export const COMPANY_CONTACTS_TABLE_QUERY = gql`
-//   query CompanyContactsTable(
-//     $filter: ContactFilter!
-//     $sorting: [ContactSort!]
-//     $paging: OffsetPaging!
-//   ) {
-//     contacts(filter: $filter, sorting: $sorting, paging: $paging) {
-//       totalCount
-//       nodes {
-//         id
-//         name
-//         avatarUrl
-//         jobTitle
-//         email
-//         phone
-//         status
-//       }
-//     }
-//   }
-// `;
+export const COMPANY_CONTACTS_TABLE_QUERY = gql`
+  query CompanyContactsTable(
+    $filter: ContactFilter!
+    $sorting: [ContactSort!]
+    $paging: OffsetPaging!
+  ) {
+    contacts(filter: $filter, sorting: $sorting, paging: $paging) {
+      totalCount
+      nodes {
+        id
+        name
+        avatarUrl
+        jobTitle
+        email
+        phone
+        status
+      }
+    }
+  }
+`;
 
 // // Query to get task stages list
-// export const TASK_STAGES_QUERY = gql`
-//   query TaskStages(
-//     $filter: TaskStageFilter!
-//     $sorting: [TaskStageSort!]
-//     $paging: OffsetPaging!
-//   ) {
-//     taskStages(filter: $filter, sorting: $sorting, paging: $paging) {
-//       totalCount # Get the total count of task stages
-//       nodes {
-//         id
-//         title
-//       }
-//     }
-//   }
-// `;
+export const TASK_STAGES_QUERY = gql`
+  query TaskStages(
+    $filter: TaskStageFilter!
+    $sorting: [TaskStageSort!]
+    $paging: OffsetPaging!
+  ) {
+    taskStages(filter: $filter, sorting: $sorting, paging: $paging) {
+      totalCount # Get the total count of task stages
+      nodes {
+        id
+        title
+      }
+    }
+  }
+`;
 
 // // Query to get tasks list
-// export const TASKS_QUERY = gql`
-//   query Tasks(
-//     $filter: TaskFilter!
-//     $sorting: [TaskSort!]
-//     $paging: OffsetPaging!
-//   ) {
-//     tasks(filter: $filter, sorting: $sorting, paging: $paging) {
-//       totalCount # Get the total count of tasks
-//       nodes {
-//         id
-//         title
-//         description
-//         dueDate
-//         completed
-//         stageId
-//         # Get user details associated with this task
-//         users {
-//           id
-//           name
-//           avatarUrl
-//         }
-//         createdAt
-//         updatedAt
-//       }
-//     }
-//   }
-// `;
+export const TASKS_QUERY = gql`
+  query Tasks(
+    $filter: TaskFilter!
+    $sorting: [TaskSort!]
+    $paging: OffsetPaging!
+  ) {
+    tasks(filter: $filter, sorting: $sorting, paging: $paging) {
+      totalCount # Get the total count of tasks
+      nodes {
+        id
+        title
+        description
+        dueDate
+        completed
+        stageId
+        # Get user details associated with this task
+        users {
+          id
+          name
+          avatarUrl
+        }
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
 
 // // Query to get task stages for select
 // export const TASK_STAGES_SELECT_QUERY = gql`

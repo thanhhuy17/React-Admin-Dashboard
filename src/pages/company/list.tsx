@@ -64,7 +64,7 @@ const CompanyListPage = ({ children }: React.PropsWithChildren) => {
             onClick={() => {
               go({
                 to: {
-                  resource: "companies/",
+                  resource: "companies",
                   action: "create",
                 },
                 options: {
@@ -112,7 +112,7 @@ const CompanyListPage = ({ children }: React.PropsWithChildren) => {
           <Table.Column<Company>
             title="Actions"
             fixed="right"
-            dataIndex="totalRevenue"
+            dataIndex="id"
             render={(value) => (
               <Space>
                 <EditButton hideText size="small" recordItemId={value} />
