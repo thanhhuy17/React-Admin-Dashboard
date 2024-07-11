@@ -47,8 +47,8 @@
   },
   "scripts": {
     "dev": "refine dev",
-    "build": "tsc && refine build",
-    "preview": "refine start",
+    "build": "vite build",
+    "preview": "vite preview",
     "refine": "refine",
     "codegen": "graphql-codegen",
     "test": "jest"
