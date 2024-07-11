@@ -16,11 +16,11 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "./",
-    "paths": {"@/*": ["./src/*"]}
+    // "paths": {"@/*": ["./src/*"]}
   },
   "include": [
     "src/**/*",
-    "vite.config.ts"
+    // "vite.config.ts"
   ],
   "references": [
     {
