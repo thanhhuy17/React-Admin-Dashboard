@@ -22,6 +22,9 @@ import { TextIcon } from "../../text-icon";
 import dayjs from "dayjs";
 import { getDateColor } from "../../../utilities";
 import CustomAvatar from "../../custom-avata";
+import { useDelete, useNavigation } from "@refinedev/core";
+import { resources } from "../../../config/resources";
+import gql from "graphql-tag";
 
 type ProjectCardProps = {
   id: string;
@@ -42,16 +45,18 @@ const ProjectCard = ({
   users,
 }: ProjectCardProps) => {
   const { token } = theme.useToken();
-  const edit = () => {};
+  // const edit = () => {};
+  const { edit } = useNavigation();
+  const { mutate } = useDelete();
 
   const dropdownItems = useMemo(() => {
-    const dropdownItems: MenuProps["item"] = [
+    const dropdownItems: MenuProps["items"] = [
       {
         label: "View card",
         key: "1",
         icon: <EyeOutlined />,
         onClick: () => {
-          edit();
+          edit("tasks", id, "replace");
         },
       },
       {
@@ -59,7 +64,15 @@ const ProjectCard = ({
         label: "Delete card",
         key: "true",
         icon: <DeleteOutlined />,
-        onClick: () => {},
+        onClick: () => {
+          mutate({
+            resource: "tasks",
+            id,
+            meta: {
+              operation: "task",
+            },
+          });
+        },
       },
     ];
     return dropdownItems;
@@ -89,11 +102,19 @@ const ProjectCard = ({
       <Card
         size="small"
         title={<Text ellipsis={{ tooltip: title }}>{title}</Text>}
-        onClick={() => edit()}
+        onClick={() => edit("tasks", id, "replace")}
         extra={
           <Dropdown
             trigger={["click"]}
-            menu={{ items: dropdownItems }}
+            menu={{
+              items: dropdownItems,
+              onPointerDown: (e) => {
+                e.stopPropagation();
+              },
+              onClick: (e) => {
+                e.domEvent.stopPropagation();
+              },
+            }}
             placement="bottom"
             arrow={{ pointAtCenter: true }}
           >

@@ -58,7 +58,7 @@ const KanbanColunm = ({
       <div
         style={{
           flex: 1,
-          overflow: active ? "unset" : "scroll",
+          overflow: active ? "unset" : "auto",
           border: "2px transparent",
           borderColor: isOver ? "#000040" : "transparent",
           borderRadius: "4px",

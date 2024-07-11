@@ -1,7 +1,7 @@
 import { Skeleton } from "antd";
 
 // create a skeleton for the accordion header
-const AccordionHeaderSkeleton = () => {
+export const AccordionHeaderSkeleton = () => {
   return (
     <div
       style={{

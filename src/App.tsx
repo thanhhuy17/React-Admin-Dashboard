@@ -20,6 +20,8 @@ import CompanyListPage from "./pages/company/list";
 import Create from "./pages/company/create";
 import EditPage from "./pages/company/edit";
 import List from "./pages/task/list";
+import EditTask from "./pages/task/edit";
+import TasksCreatePage from "./pages/task/create";
 
 function App() {
   return (
@@ -35,28 +37,6 @@ function App() {
               routerProvider={routerBindings}
               authProvider={authProvider}
               resources={resources}
-              // resources={[
-              //   {
-              //     name: "blog_posts",
-              //     list: "/blog-posts",
-              //     create: "/blog-posts/create",
-              //     edit: "/blog-posts/edit/:id",
-              //     show: "/blog-posts/show/:id",
-              //     meta: {
-              //       canDelete: true,
-              //     },
-              //   },
-              //   {
-              //     name: "categories",
-              //     list: "/categories",
-              //     create: "/categories/create",
-              //     edit: "/categories/edit/:id",
-              //     show: "/categories/show/:id",
-              //     meta: {
-              //       canDelete: true,
-              //     },
-              //   },
-              // ]}
               options={{
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
@@ -87,9 +67,16 @@ function App() {
                     <Route path="new" element={<Create />} />
                     <Route path="edit/:id" element={<EditPage />} />
                   </Route>
-                  <Route path="/tasks">
-                  <Route index element={<List />} />
-                    
+                  <Route
+                    path="/tasks"
+                    element={
+                      <List>
+                        <Outlet />
+                      </List>
+                    }
+                  >
+                    <Route path="new" element={<TasksCreatePage />} />
+                    <Route path="edit/:id" element={<EditTask />} />
                   </Route>
                 </Route>
               </Routes>
