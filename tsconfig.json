@@ -13,13 +13,14 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false,
+    "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {"@/*": ["./src/*"]}
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "vite.config.ts" 
   ],
   "references": [
     {
