@@ -15,11 +15,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./scr",
-    "paths": {"@/*" : ["./*"]}
+    "baseUrl": "./",
+    "paths": {"@/*": ["./src/*"]}
   },
   "include": [
-    "src",
+    "src/**/*",
     "vite.config.ts"
   ],
   "references": [
