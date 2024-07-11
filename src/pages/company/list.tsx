@@ -18,7 +18,11 @@ import { Company } from "../../graphql/schema.types";
 
 const CompanyListPage = ({ children }: React.PropsWithChildren) => {
   const go = useGo();
-  const { tableProps, fillter } = useTable({
+  const { tableProps, fillter } = useTable<
+    GetFieldFromList<CompaniesListQuery>,
+    HttpError,
+    GetFieldFromList<CompaniesListQuery>
+  >({
     resource: "companies",
     onSearch: (values) => {
       return [
