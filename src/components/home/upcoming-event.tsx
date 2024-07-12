@@ -1,15 +1,13 @@
 import { CalendarOutlined } from "@ant-design/icons";
 import { Badge, Card, List } from "antd";
 import { Text } from "../text";
-// import { useState } from "react";
 import UpcomingEventSkeleton from "../skeleton/upcoming-events";
 import { useList } from "@refinedev/core";
 import { DASHBOARD_CALENDAR_UPCOMING_EVENTS_QUERY } from "../../graphql/queries";
 import { formatEventDates } from "../../utilities/date/format-event-dates";
-// import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 
 const UpcomingEvent = () => {
-  //   const [isLoading, setIsLoading] = useState(false);
   const { data, isLoading } = useList({
     resource: "events",
     pagination: { pageSize: 5 },
@@ -23,15 +21,15 @@ const UpcomingEvent = () => {
       {
         field: "startDate",
         operator: "gte", //  Greenwich Mean Time đi qua Đài thiên văn Hoàng gia Greenwich
-        value: "",
+        value: dayjs,
       },
     ],
     meta: {
       gqlQuery: DASHBOARD_CALENDAR_UPCOMING_EVENTS_QUERY,
     },
   });
-  //   alert(JSON.stringify(data));
-  //   console.log("Response Data", data?.data);
+  // alert(JSON.stringify(data));
+  // console.log("Response Data: ", data); //tôi lấy dữ liệu ở đây đã thấy rỗng rồi
   return (
     <Card
       style={{
@@ -61,6 +59,9 @@ const UpcomingEvent = () => {
           dataSource={data?.data || []}
           renderItem={(item) => {
             const renderDate = formatEventDates(item.startDate, item.endDate);
+
+            // console.log("Start Date:", item.startDate);
+            // console.log("End Date:", item.endDate);
 
             return (
               // Show list Upcomping Events

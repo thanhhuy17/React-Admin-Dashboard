@@ -17,7 +17,7 @@ export const Home = () => {
       gqlQuery: DASHBOARD_TOTAL_COUNTS_QUERY,
     },
   });
-  console.log("DataTestH: ", data); // have Data
+  // console.log("DataTestH: ", data); // have Data
 
   return (
     <div>

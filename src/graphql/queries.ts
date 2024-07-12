@@ -52,6 +52,7 @@ export const DASHBOARD_CALENDAR_UPCOMING_EVENTS_QUERY = gql`
   }
 `;
 
+
 // Drow Chart
 export const DASHBOARD_DEALS_CHART_QUERY = gql`
   query DashboardDealsChart(
